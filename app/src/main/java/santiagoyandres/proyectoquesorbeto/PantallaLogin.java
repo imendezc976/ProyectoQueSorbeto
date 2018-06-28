@@ -31,8 +31,7 @@ public class PantallaLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String result[] = UtilPref.getUserAdminPreferences();
-                //Toast.makeText(getApplicationContext(), eTxt_Email_PL.getText().toString(), Toast.LENGTH_LONG).show();
-                if(eTxt_Email_PL.getText().toString() == result[0].toString()){// && (eTxt_Password_PL.getText().toString() == result[1])){
+                if(eTxt_Email_PL.getText().toString().equals(result[0]) && eTxt_Password_PL.getText().toString().equals(result[1])){
                     Toast.makeText(getApplicationContext(), "Login", Toast.LENGTH_LONG).show();
                 } else{
                     Toast.makeText(getApplicationContext(), "Invalid login.", Toast.LENGTH_LONG).show();
