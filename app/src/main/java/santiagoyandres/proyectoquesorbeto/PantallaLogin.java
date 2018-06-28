@@ -1,5 +1,6 @@
 package santiagoyandres.proyectoquesorbeto;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,11 @@ public class PantallaLogin extends AppCompatActivity {
             public void onClick(View v) {
                 String result[] = UtilPref.getUserAdminPreferences();
                 if(eTxt_Email_PL.getText().toString().equals(result[0]) && eTxt_Password_PL.getText().toString().equals(result[1])){
-                    Toast.makeText(getApplicationContext(), "Login", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Login", Toast.LENGTH_LONG).show();
+                    Intent menuPrincipal = new Intent(getApplicationContext(), menuPrincipal.class);
+                    menuPrincipal.putExtra("user", eTxt_Email_PL.getText().toString());
+                    menuPrincipal.putExtra("password", eTxt_Password_PL.getText().toString());
+                    startActivity(menuPrincipal);
                 } else{
                     Toast.makeText(getApplicationContext(), "Invalid login.", Toast.LENGTH_LONG).show();
                 }
