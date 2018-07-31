@@ -12,6 +12,8 @@ public class objCliente {
         this.telefono = telefono;
     }
 
+    public objCliente(){}
+
     public int getId() {
         return id;
     }
