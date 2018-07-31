@@ -1,31 +1,40 @@
 package santiagoyandres.proyectoquesorbeto;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class menuPrincipal extends AppCompatActivity {
 
-    TextView txt01;
-    TextView txt02;
+    TextView tView_Username_MP;
+    Button btn_Usuarios_MP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        txt01 = (TextView) findViewById(R.id.txt01);
-        txt02 = (TextView) findViewById(R.id.txt02);
+        tView_Username_MP = (TextView) findViewById(R.id.tView_Username_MP);
+        btn_Usuarios_MP = (Button) findViewById(R.id.btn_Usuarios_MP);
+
+        btn_Usuarios_MP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pantallaUsuarios = new Intent(getApplicationContext(), PantallaUsuarios.class);
+                startActivity(pantallaUsuarios);
+            }
+        });
+
 
         Bundle extras = getIntent().getExtras();
 
         if (extras != null){
-            txt01.setText(extras.getString("user"));
-            txt02.setText(extras.getString("password"));
+            tView_Username_MP.setText(extras.getString("user"));
         }else{
-            txt01.setText("Error");
-            txt02.setText("Error");
+            tView_Username_MP.setText("No se pudo obtener el nombre de usuario");
         }
 
     }
