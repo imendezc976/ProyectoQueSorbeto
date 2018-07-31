@@ -17,6 +17,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
     private static final String Cliente_ID = "id";
     private static final String Cliente_Nombre = "nombre";
     private static final String Cliente_Telefono = "telefono";
+    private static final String Cliente_Nacionalidad = "nacionalidad";
 
     // Tabla Producto
     private static final String Producto_ID_Prod = "id";
@@ -32,7 +33,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
 
     private static final String CREA_TABLA_PERSONA =
             "CREATE TABLE IF NOT EXISTS Clientes (" + Cliente_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                    Cliente_Nombre + " TEXT, " + Cliente_Telefono + " TEXT )";
+                    Cliente_Nombre + " TEXT, " +  Cliente_Nacionalidad + " TEXT, " + Cliente_Telefono + " TEXT )";
 
     private static final String CREA_TABLA_PRODUCTO =
             "CREATE TABLE IF NOT EXISTS Producto (" + Producto_ID_Prod  + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
@@ -73,6 +74,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Cliente_Nombre, persona.nombre);
         values.put(Cliente_Telefono, persona.telefono);
+        values.put(Cliente_Nacionalidad, persona.nacionalidad);
 
         SQLiteDatabase db = this.getWritableDatabase();
         long cliente_Id = db.insert("Clientes", null, values);
@@ -143,6 +145,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
                 //persona.clienteId =cursor.getInt(cursor.getColumnIndex(COL_ID));
                 persona.nombre =cursor.getString(cursor.getColumnIndex(Cliente_Nombre));
                 persona.telefono =cursor.getString(cursor.getColumnIndex(Cliente_Telefono));
+                persona.nacionalidad = cursor.getString(cursor.getColumnIndex(Cliente_Nacionalidad));
 
             } while (cursor.moveToNext());
         }
