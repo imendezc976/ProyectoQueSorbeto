@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PantallaUsuarios">
+
+    <TextView
+        android:id="@+id/tViewId_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/eTextId_PU"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="35dp"
+        android:text="Identificacion:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eTextId_PU"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextNombre_PU"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="99dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/spinPaises_PU"
+        android:layout_width="166dp"
+        android:layout_height="36dp"
+        android:layout_alignEnd="@+id/eTextNombre_PU"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="171dp" />
+
+    <TextView
+        android:id="@+id/tViewTitulo_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="21dp"
+        android:text="Clientes"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tViewNombre_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tViewId_PU"
+        android:layout_marginTop="173dp"
+        android:text="Nombre:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewTelefono_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tViewNombre_PU"
+        android:layout_centerVertical="true"
+        android:text="Telefono:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewNacionalidad_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tViewNombre_PU"
+        android:layout_alignTop="@+id/spinPaises_PU"
+        android:text="Nacionalidad:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eTextNombre_PU"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tViewNombre_PU"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="41dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/eTextTelefono_PU"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/spinPaises_PU"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+</RelativeLayout>

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,48 +24,41 @@ import java.util.ArrayList;
 public class PantallaUsuarios extends AppCompatActivity {
 
     ArrayList<String> paises = new ArrayList<>();
-    Button boton;
-    Spinner spinner123;
+    Spinner spinPaises_PU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios);
+        setContentView(R.layout.activity_pantalla_usuarios);
 
-        miTarea hagale = new miTarea();
-        hagale.execute();
-        inicializaContenido();
+        paises.add("Seleccione...");
+        paisesApi rellenaPaises = new paisesApi();
+        rellenaPaises.execute();
+
+        inicializaComponentes();
     }
 
-    private void inicializaContenido(){
-        boton = (Button) findViewById(R.id.button);
-        spinner123 = (Spinner) findViewById(R.id.spinner);
-
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                miTarea hagale = new miTarea();
-                hagale.execute();
-
-
-            }
-        });
-
-        // Spinner click listener
-        spinner123.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-            public void onItemSelected(AdapterView<?>
-                                               arg0,View arg1,int arg2,long arg3){
-            }
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
+    private void inicializaComponentes(){
+        spinPaises_PU = (Spinner) findViewById(R.id.spinPaises_PU);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paises);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner123.setAdapter(dataAdapter);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinPaises_PU.setAdapter(dataAdapter);
+
+        spinPaises_PU.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // textViewPrueba.setText("Seleccion: ");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    private class miTarea extends AsyncTask<Void, Void, Void> {
+    private class paisesApi extends AsyncTask<Void, Void, Void> {
         //String UrlTxt = "https://jsonip.com/";
         String UrlTxt = "https://restcountries.eu/rest/v2/region/Americas";
         String elTextoBuffer;
