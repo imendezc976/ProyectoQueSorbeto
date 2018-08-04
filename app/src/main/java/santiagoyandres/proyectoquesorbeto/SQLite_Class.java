@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
     private static final String Factura_fecha = "fecha";
 
     private static final String CREA_TABLA_PERSONA =
-            "CREATE TABLE IF NOT EXISTS Clientes (" + Cliente_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
+            "CREATE TABLE IF NOT EXISTS Clientes (" + Cliente_ID  + " INTEGER PRIMARY KEY," + //" AUTOINCREMENT ," +
                     Cliente_Nombre + " TEXT, " +  Cliente_Nacionalidad + " TEXT, " + Cliente_Telefono + " TEXT )";
 
     private static final String CREA_TABLA_PRODUCTO =
@@ -72,14 +73,17 @@ public class SQLite_Class extends SQLiteOpenHelper {
     // Funciones para el cliente
     public int InsertaCliente(objCliente persona) {
         ContentValues values = new ContentValues();
+        values.put(Cliente_ID, persona.id);
         values.put(Cliente_Nombre, persona.nombre);
         values.put(Cliente_Telefono, persona.telefono);
         values.put(Cliente_Nacionalidad, persona.nacionalidad);
 
         SQLiteDatabase db = this.getWritableDatabase();
-        long cliente_Id = db.insert("Clientes", null, values);
+        //long cliente_Id =
+                db.insert("Clientes", null, values);
         db.close();// Cierra la conexión con la BD
-        return (int) cliente_Id;
+
+        return (int) persona.id;
     }// Fin InsertaCliente =======================
 
     public void BorraCliente(int cliente_Id) {
@@ -135,19 +139,22 @@ public class SQLite_Class extends SQLiteOpenHelper {
         objCliente persona = new objCliente();
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery =  "SELECT  " + Cliente_ID + "," +
-                Cliente_Nombre + "," + Cliente_Telefono +
+                Cliente_Nombre + "," + Cliente_Telefono + "," + Cliente_Nacionalidad +
                 " FROM Clientes WHERE " + Cliente_ID + "=?";
 
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
 
+
         if (cursor.moveToFirst()) {
             do {
-                //persona.clienteId =cursor.getInt(cursor.getColumnIndex(COL_ID));
-                persona.nombre =cursor.getString(cursor.getColumnIndex(Cliente_Nombre));
-                persona.telefono =cursor.getString(cursor.getColumnIndex(Cliente_Telefono));
+                persona.id = cursor.getInt(cursor.getColumnIndex(Cliente_ID));
+                persona.nombre = cursor.getString(cursor.getColumnIndex(Cliente_Nombre));
+                persona.telefono = cursor.getString(cursor.getColumnIndex(Cliente_Telefono));
                 persona.nacionalidad = cursor.getString(cursor.getColumnIndex(Cliente_Nacionalidad));
 
             } while (cursor.moveToNext());
+        } else {
+            persona = null;
         }
         cursor.close();
         db.close();

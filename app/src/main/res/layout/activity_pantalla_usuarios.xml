@@ -98,4 +98,23 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <Button
+        android:id="@+id/btnInsertar_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="51dp"
+        android:text="Insertar" />
+
+    <Button
+        android:id="@+id/btnConsulta_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tViewTitulo_PU"
+        android:layout_marginEnd="55dp"
+        android:text="Consultar" />
+
 </RelativeLayout>
