@@ -30,6 +30,7 @@ public class PantallaUsuarios extends AppCompatActivity {
     Spinner spinPaises_PU;
     Button btnInsertar_PU;
     Button btnConsulta_PU;
+    Button btnModificar_PU;
     EditText eTextId_PU;
     EditText eTextNombre_PU;
     EditText eTextTelefono_PU;
@@ -44,8 +45,8 @@ public class PantallaUsuarios extends AppCompatActivity {
         baseDeDatos = new SQLite_Class(getApplicationContext());
 
         paises.add("Seleccione...");
-        //paisesApi rellenaPaises = new paisesApi();
-        //rellenaPaises.execute();
+        paisesApi rellenaPaises = new paisesApi();
+        rellenaPaises.execute();
 
         inicializaComponentes();
     }
@@ -55,6 +56,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         spinPaises_PU = (Spinner) findViewById(R.id.spinPaises_PU);
         btnInsertar_PU = (Button) findViewById(R.id.btnInsertar_PU);
         btnConsulta_PU = (Button) findViewById(R.id.btnConsulta_PU);
+        btnModificar_PU = (Button) findViewById(R.id.btnModificar_PU);
         eTextId_PU = (EditText) findViewById(R.id.eTextId_PU);
         eTextNombre_PU = (EditText) findViewById(R.id.eTextNombre_PU);
         eTextTelefono_PU = (EditText) findViewById(R.id.eTextTelefono_PU);
@@ -81,12 +83,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         btnInsertar_PU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                objCliente clienteNuevo = new objCliente(Integer.parseInt(eTextId_PU.getText().toString()),
-                                                         eTextNombre_PU.getText().toString(),
-                                                         eTextTelefono_PU.getText().toString(),
-                                                         spinPaises_PU.getSelectedItem().toString());
-                int resultado = baseDeDatos.InsertaCliente(clienteNuevo);
-                Toast.makeText(getApplicationContext(), "Cliente insertado correctamente. El id de cliente es: " + String.valueOf(resultado), Toast.LENGTH_LONG).show();
+                accionBotonInserta();
             }
         });
 
@@ -94,19 +91,59 @@ public class PantallaUsuarios extends AppCompatActivity {
         btnConsulta_PU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                objCliente clienteConsultado = new objCliente();
-                clienteConsultado = baseDeDatos.BuscaPersona_x_ID(Integer.parseInt(eTextId_PU.getText().toString()));
-
-                if(!(clienteConsultado == null)){
-                    //eTextNombre_PU.setText(clienteConsultado.nombre);
-                    //eTextTelefono_PU.setText(clienteConsultado.telefono);
-                } else{
-                    Toast.makeText(getApplicationContext(), "El cliente no fue encontrado.", Toast.LENGTH_LONG).show();
-                }
-
-
+                accionBotonConsulta();
             }
         });
+
+        // Funcion para boton modificar
+        btnModificar_PU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accionBotonModifica();
+            }
+        });
+    }
+
+    private void LimpiaCampos(){
+        eTextId_PU.setText("");
+        eTextNombre_PU.setText("");
+        eTextTelefono_PU.setText("");
+        spinPaises_PU.setSelection(0);
+    }
+
+    private void accionBotonInserta(){
+        objCliente clienteNuevo = new objCliente(Integer.parseInt(eTextId_PU.getText().toString()),
+                                                eTextNombre_PU.getText().toString(),
+                                                eTextTelefono_PU.getText().toString(),
+                                                spinPaises_PU.getSelectedItem().toString());
+        int resultado = baseDeDatos.InsertaCliente(clienteNuevo);
+        Toast.makeText(getApplicationContext(), "Cliente insertado correctamente. El id de cliente es: " + String.valueOf(resultado), Toast.LENGTH_LONG).show();
+        LimpiaCampos();
+    }
+
+    private void accionBotonConsulta(){
+        objCliente clienteConsultado = new objCliente();
+        clienteConsultado = baseDeDatos.BuscaPersona_x_ID(Integer.parseInt(eTextId_PU.getText().toString()));
+
+        if(clienteConsultado != null){
+            eTextNombre_PU.setText(clienteConsultado.nombre);
+            eTextTelefono_PU.setText(clienteConsultado.telefono);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paises);
+            spinPaises_PU.setAdapter(dataAdapter);
+            int opcionSpinner = dataAdapter.getPosition(clienteConsultado.nacionalidad);
+            spinPaises_PU.setSelection(opcionSpinner);
+        } else{
+            Toast.makeText(getApplicationContext(), "El cliente no fue encontrado.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void accionBotonModifica(){
+        objCliente clienteAModificar = new objCliente(Integer.parseInt(eTextId_PU.getText().toString()),
+                                                        eTextNombre_PU.getText().toString(),
+                                                        eTextTelefono_PU.getText().toString(),
+                                                        spinPaises_PU.getSelectedItem().toString());
+        baseDeDatos.ModificaCliente(clienteAModificar);
+        Toast.makeText(getApplicationContext(), "Cliente modificado correctamente.", Toast.LENGTH_LONG).show();
     }
 
     private class paisesApi extends AsyncTask<Void, Void, Void> {

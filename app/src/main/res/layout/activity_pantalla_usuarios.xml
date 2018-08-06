@@ -117,4 +117,12 @@
         android:layout_marginEnd="55dp"
         android:text="Consultar" />
 
+    <Button
+        android:id="@+id/btnModificar_PU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnConsulta_PU"
+        android:layout_alignTop="@+id/btnInsertar_PU"
+        android:text="Modificar" />
+
 </RelativeLayout>

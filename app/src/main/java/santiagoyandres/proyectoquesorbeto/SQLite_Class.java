@@ -86,6 +86,18 @@ public class SQLite_Class extends SQLiteOpenHelper {
         return (int) persona.id;
     }// Fin InsertaCliente =======================
 
+    public int ModificaCliente(objCliente persona){
+        ContentValues values = new ContentValues();
+        values.put(Cliente_Nombre, persona.nombre);
+        values.put(Cliente_Telefono, persona.telefono);
+        values.put(Cliente_Nacionalidad, persona.nacionalidad);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.update("Clientes", values, Cliente_ID + "=" + persona.id, null);
+        db.close();
+        return 0;
+    }
+
     public void BorraCliente(int cliente_Id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("Clientes", Cliente_ID + "= ?", new String[] { String.valueOf(cliente_Id) });
