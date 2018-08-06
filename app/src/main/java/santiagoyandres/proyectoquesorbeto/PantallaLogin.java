@@ -3,6 +3,8 @@ package santiagoyandres.proyectoquesorbeto;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +44,21 @@ public class PantallaLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid login.", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+        eTxt_Email_PL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eTxt_Email_PL.setText("");
+            }
+        });
+
+        eTxt_Password_PL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eTxt_Password_PL.setText("");
+                eTxt_Password_PL.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
     }
