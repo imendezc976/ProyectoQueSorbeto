@@ -31,6 +31,7 @@ public class PantallaUsuarios extends AppCompatActivity {
     Button btnInsertar_PU;
     Button btnConsulta_PU;
     Button btnModificar_PU;
+    Button btnCancelar_PU;
     EditText eTextId_PU;
     EditText eTextNombre_PU;
     EditText eTextTelefono_PU;
@@ -49,6 +50,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         rellenaPaises.execute();
 
         inicializaComponentes();
+        activaCampos(false);
     }
 
     private void inicializaComponentes(){
@@ -57,6 +59,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         btnInsertar_PU = (Button) findViewById(R.id.btnInsertar_PU);
         btnConsulta_PU = (Button) findViewById(R.id.btnConsulta_PU);
         btnModificar_PU = (Button) findViewById(R.id.btnModificar_PU);
+        btnCancelar_PU = (Button) findViewById(R.id.btnCancelar_PU);
         eTextId_PU = (EditText) findViewById(R.id.eTextId_PU);
         eTextNombre_PU = (EditText) findViewById(R.id.eTextNombre_PU);
         eTextTelefono_PU = (EditText) findViewById(R.id.eTextTelefono_PU);
@@ -102,6 +105,14 @@ public class PantallaUsuarios extends AppCompatActivity {
                 accionBotonModifica();
             }
         });
+
+        // Funcion para el boton cancelar
+        btnCancelar_PU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accionBotonCancelar();
+            }
+        });
     }
 
     private void LimpiaCampos(){
@@ -109,6 +120,13 @@ public class PantallaUsuarios extends AppCompatActivity {
         eTextNombre_PU.setText("");
         eTextTelefono_PU.setText("");
         spinPaises_PU.setSelection(0);
+    }
+
+    private void activaCampos(boolean estado){
+        eTextId_PU.setEnabled(!estado);
+        eTextNombre_PU.setEnabled(estado);
+        eTextTelefono_PU.setEnabled(estado);
+        spinPaises_PU.setEnabled(estado);
     }
 
     private void accionBotonInserta(){
@@ -119,6 +137,8 @@ public class PantallaUsuarios extends AppCompatActivity {
         int resultado = baseDeDatos.InsertaCliente(clienteNuevo);
         Toast.makeText(getApplicationContext(), "Cliente insertado correctamente. El id de cliente es: " + String.valueOf(resultado), Toast.LENGTH_LONG).show();
         LimpiaCampos();
+        activaCampos(false);
+        btnInsertar_PU.setVisibility(View.INVISIBLE);
     }
 
     private void accionBotonConsulta(){
@@ -126,14 +146,21 @@ public class PantallaUsuarios extends AppCompatActivity {
         clienteConsultado = baseDeDatos.BuscaPersona_x_ID(Integer.parseInt(eTextId_PU.getText().toString()));
 
         if(clienteConsultado != null){
+            activaCampos(true);
             eTextNombre_PU.setText(clienteConsultado.nombre);
             eTextTelefono_PU.setText(clienteConsultado.telefono);
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paises);
             spinPaises_PU.setAdapter(dataAdapter);
             int opcionSpinner = dataAdapter.getPosition(clienteConsultado.nacionalidad);
             spinPaises_PU.setSelection(opcionSpinner);
+            btnModificar_PU.setVisibility(View.VISIBLE);
+            btnCancelar_PU.setVisibility(View.VISIBLE);
+            btnConsulta_PU.setVisibility(View.INVISIBLE);
         } else{
-            Toast.makeText(getApplicationContext(), "El cliente no fue encontrado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "El cliente no fue encontrado. ¿Desea ingresarlo?", Toast.LENGTH_LONG).show();
+            activaCampos(true);
+            eTextId_PU.setEnabled(true);
+            btnInsertar_PU.setVisibility(View.VISIBLE);
         }
     }
 
@@ -144,6 +171,18 @@ public class PantallaUsuarios extends AppCompatActivity {
                                                         spinPaises_PU.getSelectedItem().toString());
         baseDeDatos.ModificaCliente(clienteAModificar);
         Toast.makeText(getApplicationContext(), "Cliente modificado correctamente.", Toast.LENGTH_LONG).show();
+        btnModificar_PU.setVisibility(View.INVISIBLE);
+        btnCancelar_PU.setVisibility(View.INVISIBLE);
+        btnConsulta_PU.setVisibility(View.VISIBLE);
+        LimpiaCampos();
+        activaCampos(false);
+    }
+    private void accionBotonCancelar(){
+        LimpiaCampos();
+        activaCampos(false);
+        btnModificar_PU.setVisibility(View.INVISIBLE);
+        btnCancelar_PU.setVisibility(View.INVISIBLE);
+        btnConsulta_PU.setVisibility(View.VISIBLE);
     }
 
     private class paisesApi extends AsyncTask<Void, Void, Void> {
