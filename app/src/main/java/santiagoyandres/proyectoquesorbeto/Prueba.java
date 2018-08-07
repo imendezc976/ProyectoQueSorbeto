@@ -20,11 +20,14 @@ public class Prueba extends AppCompatActivity {
     ListView lista;
     ArrayList<String> arreglo;
     Button pruebabtn;
+    SQLite_Class baseDeDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prueba);
+
+        baseDeDatos = new SQLite_Class(getApplicationContext());
 
         arreglo = new ArrayList<>();
         lista = (ListView) findViewById(R.id.Lista_PRU);
@@ -40,7 +43,11 @@ public class Prueba extends AppCompatActivity {
                 //ArrayAdapter adaptador = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, arreglo);
                 //lista.setAdapter(adaptador);
 
-                crearSubitems();
+                //crearSubitems();
+                baseDeDatos.BorraTodosLosCliente();
+                baseDeDatos.BorraCliente(3);
+                baseDeDatos.BorraCliente(4);
+
             }
         });
     }

@@ -150,6 +150,8 @@ public class PantallaUsuarios extends AppCompatActivity {
         activaCampos(false);
         btnInsertar_PU.setVisibility(View.INVISIBLE);
         lViewClientes_PU.setVisibility(View.VISIBLE);
+        btnCancelar_PU.setVisibility(View.INVISIBLE);
+        listarClientes();
     }
 
     private void accionBotonConsulta(){
@@ -189,6 +191,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         btnConsulta_PU.setVisibility(View.VISIBLE);
         LimpiaCampos();
         activaCampos(false);
+        listarClientes();
     }
     private void accionBotonCancelar(){
         LimpiaCampos();
@@ -203,9 +206,14 @@ public class PantallaUsuarios extends AppCompatActivity {
     private void listarClientes(){
 
         HashMap<String, String> nombres = new HashMap<>();
-        nombres.put("Nombre", "Cedula");
-        nombres.put("Nombre2", "Cedula2");
-        nombres.put("Nombre3", "Cedula3");
+       // nombres.put("Nombre", "Cedula");
+
+        ArrayList<String[]> resultadoNombres = new ArrayList<String[]>();
+        resultadoNombres = baseDeDatos.ConsultaClientes();
+
+        for(String[] resultado : resultadoNombres){
+            nombres.put(resultado[0], resultado[1]);
+        }
 
         List<HashMap<String, String>> listaDeItems = new ArrayList<>();
 

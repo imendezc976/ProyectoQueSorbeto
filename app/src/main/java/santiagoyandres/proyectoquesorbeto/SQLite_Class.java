@@ -125,18 +125,25 @@ public class SQLite_Class extends SQLiteOpenHelper {
         return CantElementos;
     }//Fin CuentaClientes =======================
 
-    public ArrayList <String> ConsultaClientes() {
+    public ArrayList <String[]> ConsultaClientes() {
+        String identificacion = "";
         String Nombre = "";
         String Telefono = "";
-        ArrayList<String> ListaPersonas = new ArrayList<String>();
+        ArrayList<String[]> ListaPersonas = new ArrayList<String[]>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Clientes", null);
 
         while(cursor.moveToNext())
         {
+            identificacion = cursor.getString(cursor.getColumnIndex(Cliente_ID));
             Telefono = cursor.getString(cursor.getColumnIndex(Cliente_Telefono));
             Nombre = cursor.getString(cursor.getColumnIndex(Cliente_Nombre));
-            ListaPersonas.add(Telefono + ", " + Nombre);
+            String[] resultado = {"",""};
+            resultado[0] = identificacion;
+            resultado[1] = Nombre;
+            ListaPersonas.add(resultado);
+
+            identificacion = "";
             Nombre = "";
             Telefono = "";
         }//Fin while
