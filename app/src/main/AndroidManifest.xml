@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".menuPrincipal" />
         <activity android:name=".PantallaUsuarios" />
+        <activity android:name=".Prueba"></activity>
     </application>
 
 </manifest>

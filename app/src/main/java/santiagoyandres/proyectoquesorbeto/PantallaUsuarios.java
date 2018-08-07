@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +24,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class PantallaUsuarios extends AppCompatActivity {
 
@@ -35,6 +41,7 @@ public class PantallaUsuarios extends AppCompatActivity {
     EditText eTextId_PU;
     EditText eTextNombre_PU;
     EditText eTextTelefono_PU;
+    ListView lViewClientes_PU;
 
     SQLite_Class baseDeDatos;
 
@@ -51,6 +58,7 @@ public class PantallaUsuarios extends AppCompatActivity {
 
         inicializaComponentes();
         activaCampos(false);
+        listarClientes();
     }
 
     private void inicializaComponentes(){
@@ -63,6 +71,8 @@ public class PantallaUsuarios extends AppCompatActivity {
         eTextId_PU = (EditText) findViewById(R.id.eTextId_PU);
         eTextNombre_PU = (EditText) findViewById(R.id.eTextNombre_PU);
         eTextTelefono_PU = (EditText) findViewById(R.id.eTextTelefono_PU);
+        lViewClientes_PU = (ListView) findViewById(R.id.lViewClientes_PU);
+
 
         // Inserta los datos obtenidos por el API de los paises, en el spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paises);
@@ -139,6 +149,7 @@ public class PantallaUsuarios extends AppCompatActivity {
         LimpiaCampos();
         activaCampos(false);
         btnInsertar_PU.setVisibility(View.INVISIBLE);
+        lViewClientes_PU.setVisibility(View.VISIBLE);
     }
 
     private void accionBotonConsulta(){
@@ -161,6 +172,8 @@ public class PantallaUsuarios extends AppCompatActivity {
             activaCampos(true);
             eTextId_PU.setEnabled(true);
             btnInsertar_PU.setVisibility(View.VISIBLE);
+            btnCancelar_PU.setVisibility(View.VISIBLE);
+            lViewClientes_PU.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -183,6 +196,31 @@ public class PantallaUsuarios extends AppCompatActivity {
         btnModificar_PU.setVisibility(View.INVISIBLE);
         btnCancelar_PU.setVisibility(View.INVISIBLE);
         btnConsulta_PU.setVisibility(View.VISIBLE);
+        btnInsertar_PU.setVisibility(View.INVISIBLE);
+        lViewClientes_PU.setVisibility(View.VISIBLE);
+    }
+
+    private void listarClientes(){
+
+        HashMap<String, String> nombres = new HashMap<>();
+        nombres.put("Nombre", "Cedula");
+        nombres.put("Nombre2", "Cedula2");
+        nombres.put("Nombre3", "Cedula3");
+
+        List<HashMap<String, String>> listaDeItems = new ArrayList<>();
+
+        SimpleAdapter adaptador = new SimpleAdapter(this, listaDeItems, android.R.layout.simple_expandable_list_item_2, new String[]{"First line", "Second line"}, new int[]{android.R.id.text1, android.R.id.text2});
+
+        Iterator contador = nombres.entrySet().iterator();
+        while (contador.hasNext()){
+            HashMap<String, String> resultaMap = new HashMap<>();
+            Map.Entry pair = (Map.Entry) contador.next();
+            resultaMap.put("First line", pair.getKey().toString());
+            resultaMap.put("Second line", pair.getValue().toString());
+            listaDeItems.add(resultaMap);
+        }
+
+        lViewClientes_PU.setAdapter(adaptador);
     }
 
     private class paisesApi extends AsyncTask<Void, Void, Void> {

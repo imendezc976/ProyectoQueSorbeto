@@ -5,13 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class menuPrincipal extends AppCompatActivity {
 
     TextView tView_Username_MP;
     Button btn_Usuarios_MP;
+    Button btn_Articulos_MP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +20,21 @@ public class menuPrincipal extends AppCompatActivity {
 
         tView_Username_MP = (TextView) findViewById(R.id.tView_Username_MP);
         btn_Usuarios_MP = (Button) findViewById(R.id.btn_Usuarios_MP);
+        btn_Articulos_MP = (Button) findViewById(R.id.btn_Articulos_MP);
 
         btn_Usuarios_MP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent pantallaUsuarios = new Intent(getApplicationContext(), PantallaUsuarios.class);
                 startActivity(pantallaUsuarios);
+            }
+        });
+
+        btn_Articulos_MP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pantallaArticulos = new Intent(getApplicationContext(), Prueba.class);
+                startActivity(pantallaArticulos);
             }
         });
 
