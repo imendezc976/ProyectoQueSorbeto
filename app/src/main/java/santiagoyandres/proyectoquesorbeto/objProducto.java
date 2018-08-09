@@ -12,6 +12,10 @@ public class objProducto {
         this.precio = precio;
     }
 
+    public objProducto(){
+        
+    }
+
     public int getId() {
         return id;
     }
