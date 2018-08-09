@@ -33,7 +33,7 @@ public class menuPrincipal extends AppCompatActivity {
         btn_Articulos_MP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pantallaArticulos = new Intent(getApplicationContext(), Prueba.class);
+                Intent pantallaArticulos = new Intent(getApplicationContext(), PantallaProducto.class);
                 startActivity(pantallaArticulos);
             }
         });

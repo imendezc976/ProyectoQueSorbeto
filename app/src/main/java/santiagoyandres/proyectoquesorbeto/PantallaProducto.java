@@ -113,12 +113,12 @@ public class PantallaProducto extends AppCompatActivity {
 
     private void accionBotonConsulta() {
         objProducto ProductoConsultado = new objProducto();
-        ProductoConsultado = baseDeDatos.BuscaPersona_x_ID(Integer.parseInt(eTextId_PP.getText().toString()));
+        ProductoConsultado = baseDeDatos.BuscaProducto_x_ID(Integer.parseInt(eTextId_PP.getText().toString()));
 
         if (ProductoConsultado != null) {
             activaCampos(true);
             eTextNombre_PP.setText(ProductoConsultado.nombre);
-            eTextPrecio_PP.setText(ProductoConsultado.telefono);
+            eTextPrecio_PP.setText(String.valueOf(ProductoConsultado.precio));
             btnModificar_PP.setVisibility(View.VISIBLE);
             btnCancelar_PP.setVisibility(View.VISIBLE);
             btnConsulta_PP.setVisibility(View.INVISIBLE);
