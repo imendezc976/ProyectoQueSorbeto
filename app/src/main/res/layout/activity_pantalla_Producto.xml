@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/eTextId_PP"
-        android:layout_alignEnd="@+id/tViewTitulo_PP"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
         android:text="Identificacion:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -83,17 +84,19 @@
         android:id="@+id/btnConsulta_PP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/eTextId_PP"
-        android:layout_alignTop="@+id/tViewTitulo_PP"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginTop="29dp"
         android:text="Consultar" />
 
     <Button
         android:id="@+id/btnModificar_PP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/eTextId_PP"
+        android:layout_alignEnd="@+id/btnConsulta_PP"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="94dp"
         android:text="Modificar"
         android:visibility="invisible" />
 
