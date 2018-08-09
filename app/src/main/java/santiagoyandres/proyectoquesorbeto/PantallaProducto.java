@@ -55,7 +55,7 @@ public class PantallaProducto extends AppCompatActivity {
         btnInsertar_PP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accionBotonInserta();
+                accionBotonInsertaProducto();
             }
         });
 
@@ -63,7 +63,7 @@ public class PantallaProducto extends AppCompatActivity {
         btnConsulta_PP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accionBotonConsulta();
+                accionBotonConsultaProducto();
             }
         });
 
@@ -71,7 +71,7 @@ public class PantallaProducto extends AppCompatActivity {
         btnModificar_PP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accionBotonModifica();
+                accionBotonModificaProducto();
             }
         });
 
@@ -79,7 +79,7 @@ public class PantallaProducto extends AppCompatActivity {
         btnCancelar_PP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accionBotonCancelar();
+                accionBotonCancelarProducto();
             }
         });
     }
@@ -96,7 +96,8 @@ public class PantallaProducto extends AppCompatActivity {
         eTextPrecio_PP.setEnabled(estado);
     }
 
-    private void accionBotonInserta() {
+    private void accionBotonInsertaProducto() {
+
         objProducto ProductoNuevo = new objProducto(Integer.parseInt(eTextId_PP.getText().toString()),
                 eTextNombre_PP.getText().toString(),
                 Double.parseDouble(eTextPrecio_PP.getText().toString()));
@@ -110,7 +111,7 @@ public class PantallaProducto extends AppCompatActivity {
         listarProductos();
     }
 
-    private void accionBotonConsulta() {
+    private void accionBotonConsultaProducto() {
         objProducto ProductoConsultado = new objProducto();
         ProductoConsultado = baseDeDatos.BuscaProducto_x_ID(Integer.parseInt(eTextId_PP.getText().toString()));
 
@@ -131,7 +132,7 @@ public class PantallaProducto extends AppCompatActivity {
         }
     }
 
-    private void accionBotonModifica() {
+    private void accionBotonModificaProducto() {
         objProducto ProductoAModificar = new objProducto(Integer.parseInt(eTextId_PP.getText().toString()),
                 eTextNombre_PP.getText().toString(),
                 Double.parseDouble(eTextPrecio_PP.getText().toString()));
@@ -145,7 +146,7 @@ public class PantallaProducto extends AppCompatActivity {
         listarProductos();
     }
 
-    private void accionBotonCancelar() {
+    private void accionBotonCancelarProducto() {
         LimpiaCampos();
         activaCampos(false);
         btnModificar_PP.setVisibility(View.INVISIBLE);

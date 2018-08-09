@@ -209,7 +209,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery =  "SELECT  " + Producto_ID_Prod + "," +
                 Producto_Nom_Prod + "," + Producto_Precio +
-                " FROM Clientes WHERE " + Producto_ID_Prod + "=?";
+                " FROM Producto WHERE " + Producto_ID_Prod + "=?";
 
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
 
