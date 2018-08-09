@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PantallaUsuarios">
+
+    <TextView
+        android:id="@+id/tViewId_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/eTextId_PP"
+        android:layout_alignEnd="@+id/tViewTitulo_PP"
+        android:text="Identificacion:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eTextId_PP"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextNombre_PP"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="97dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tViewTitulo_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="21dp"
+        android:text="Productos"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tViewNombre_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tViewId_PP"
+        android:layout_marginTop="173dp"
+        android:text="Nombre:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eTextNombre_PP"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tViewNombre_PP"
+        android:layout_toEndOf="@+id/tViewId_PP"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/eTextPrecio_PP"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/tViewId_PP"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnInsertar_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="51dp"
+        android:text="Insertar"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnConsulta_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextId_PP"
+        android:layout_alignTop="@+id/tViewTitulo_PP"
+        android:text="Consultar" />
+
+    <Button
+        android:id="@+id/btnModificar_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextId_PP"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="93dp"
+        android:text="Modificar"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnCancelar_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnConsulta_PP"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="31dp"
+        android:text="Cancelar"
+        android:visibility="invisible" />
+
+    <ListView
+        android:id="@+id/lViewProductos_PP"
+        android:layout_width="185dp"
+        android:layout_height="163dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tViewPrecio_PP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tViewId_PP"
+        android:layout_centerVertical="true"
+        android:text="Precio:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+</RelativeLayout>
