@@ -180,6 +180,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
         return persona;
     }// Fin BuscaPersona_x_ID =======================
 
+    // Funciones para el producto
     public int InsertaProducto(objProducto Producto) {
         ContentValues values = new ContentValues();
         values.put(Producto_Nom_Prod, Producto.nombre);
@@ -191,40 +192,71 @@ public class SQLite_Class extends SQLiteOpenHelper {
         return (int) Producto_Id;
     }// Fin InsertaCliente =======================
 
-    public ArrayList <String> ConsultaProductos() {
+    public int ModificaProducto(objProducto Producto){
+        ContentValues values = new ContentValues();
+        values.put(Producto_Nom_Prod, Producto.nombre);
+        values.put(Producto_Precio, Producto.precio);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.update("Producto", values, Producto_ID_Prod + "=" + Producto.id, null);
+        db.close();
+        return 0;
+    }
+
+    public objProducto BuscaProducto_x_ID(int Id){
+        int iCount =0;
+        objProducto producto = new objProducto();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery =  "SELECT  " + Producto_ID_Prod + "," +
+                Producto_Nom_Prod + "," + Producto_Precio +
+                " FROM Clientes WHERE " + Producto_ID_Prod + "=?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(Id) } );
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                producto.id = cursor.getInt(cursor.getColumnIndex(Producto_ID_Prod));
+                producto.nombre = cursor.getString(cursor.getColumnIndex(Producto_Nom_Prod));
+                producto.precio = cursor.getDouble(cursor.getColumnIndex(Producto_Precio));
+
+            } while (cursor.moveToNext());
+        } else {
+            producto = null;
+        }
+        cursor.close();
+        db.close();
+        return producto;
+    }// Fin BuscaPersona_x_ID =======================
+
+    public ArrayList <String[]> ConsultaProductos() {
+        String identificacion = "";
         String Nombre = "";
-        String Precio = "";
-        ArrayList<String> ListaProductos = new ArrayList<String>();
+        ArrayList<String[]> ListaProductos = new ArrayList<String[]>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Producto", null);
 
         while(cursor.moveToNext())
         {
-            Precio = cursor.getString(cursor.getColumnIndex(Producto_Precio));
+            identificacion = cursor.getString(cursor.getColumnIndex(Producto_ID_Prod));
             Nombre = cursor.getString(cursor.getColumnIndex(Producto_Nom_Prod));
-            ListaProductos.add(Nombre +", "+Precio);
+            String[] resultado = {"",""};
+            resultado[0] = identificacion;
+            resultado[1] = Nombre;
+            ListaProductos.add(resultado);
+            identificacion = "";
             Nombre = "";
-            Precio = "";
         }//Fin while
 
         cursor.close();
         db.close();
         return ListaProductos;
-    } //Fin ConsultaClientes =======================
-
+    } //Fin ConsultaProductos =======================
 
     public void EliminaTablas(String laTabla){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + laTabla);
         onCreate(db);// Crea la tabla otra vez
-    }//Fin BorraTodoCliente =======================
-
-
-
-
-
-
-
-
+    }//Fin EliminaTablas =======================
 
 }// Fin LibSQLIte
