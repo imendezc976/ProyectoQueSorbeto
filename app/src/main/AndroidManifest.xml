@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".menuPrincipal" />
         <activity android:name=".PantallaUsuarios" />
-        <activity android:name=".Prueba"></activity>
+        <activity android:name=".Prueba" />
+        <activity android:name=".PantallaProducto"></activity>
     </application>
 
 </manifest>
