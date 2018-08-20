@@ -10,8 +10,8 @@
         android:id="@+id/tViewProducto_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tViewCantidad_PF"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/tViewNumero_PF"
         android:layout_marginTop="193dp"
         android:text="Producto:"
         android:textColor="@android:color/black"
@@ -21,7 +21,7 @@
         android:id="@+id/tViewCantidad_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:layout_alignStart="@+id/tViewFecha_PF"
         android:layout_centerVertical="true"
         android:text="Cantidad:"
         android:textColor="@android:color/black"
@@ -82,8 +82,8 @@
         android:id="@+id/tViewCliente_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinCliente_PF"
-        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:layout_alignEnd="@+id/tViewFecha_PF"
+        android:layout_alignTop="@+id/spinCliente_PF"
         android:text="Cliente:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -116,7 +116,7 @@
     <Spinner
         android:id="@+id/spinCliente_PF"
         android:layout_width="193dp"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_alignEnd="@+id/eTextNumero_PF"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="-11dp"
@@ -125,7 +125,7 @@
     <Spinner
         android:id="@+id/spinProducto_PF"
         android:layout_width="189dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignStart="@+id/eTextNumero_PF"
         android:layout_alignTop="@+id/tViewProducto_PF" />
 </RelativeLayout>

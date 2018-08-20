@@ -48,6 +48,16 @@
         android:text="Articulos"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/btn_Facturacion_MP"
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="189dp"
+        android:text="Facturacion"
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/tViewUsuario_MP"
         android:layout_width="wrap_content"

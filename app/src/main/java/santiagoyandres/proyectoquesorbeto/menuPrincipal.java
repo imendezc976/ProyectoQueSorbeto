@@ -12,6 +12,7 @@ public class menuPrincipal extends AppCompatActivity {
     TextView tView_Username_MP;
     Button btn_Usuarios_MP;
     Button btn_Articulos_MP;
+    Button btn_Facturacion_MP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class menuPrincipal extends AppCompatActivity {
         tView_Username_MP = (TextView) findViewById(R.id.tView_Username_MP);
         btn_Usuarios_MP = (Button) findViewById(R.id.btn_Usuarios_MP);
         btn_Articulos_MP = (Button) findViewById(R.id.btn_Articulos_MP);
+        btn_Facturacion_MP = (Button) findViewById(R.id.btn_Facturacion_MP);
 
         btn_Usuarios_MP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,14 @@ public class menuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pantallaArticulos = new Intent(getApplicationContext(), Prueba.class);
                 startActivity(pantallaArticulos);
+            }
+        });
+
+        btn_Facturacion_MP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pantallaFacturacion = new Intent(getApplicationContext(), PantallaFacturacion.class);
+                startActivity(pantallaFacturacion);
             }
         });
 
