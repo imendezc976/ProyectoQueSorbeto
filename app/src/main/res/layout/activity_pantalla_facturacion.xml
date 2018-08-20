@@ -1,9 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PantallaFacturacion">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tViewProducto_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:layout_marginTop="193dp"
+        android:text="Producto:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewCantidad_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:layout_centerVertical="true"
+        android:text="Cantidad:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewFecha_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:layout_marginBottom="189dp"
+        android:text="Fecha:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eTextFecha_PF"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tViewFecha_PF"
+        android:layout_alignStart="@+id/eTextNumero_PF"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/eTextCantidad_PF"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eTextNumero_PF"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/eTextNumero_PF"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tViewNumero_PF"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="41dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tViewNumero_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="83dp"
+        android:text="Numero:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewCliente_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinCliente_PF"
+        android:layout_alignStart="@+id/tViewNumero_PF"
+        android:text="Cliente:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewNumero_PF3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="83dp"
+        android:text="Numero:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewTitulo_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Facturacion"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinCliente_PF"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextNumero_PF"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="-11dp"
+        android:layout_marginTop="141dp" />
+
+    <Spinner
+        android:id="@+id/spinProducto_PF"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eTextNumero_PF"
+        android:layout_alignTop="@+id/tViewProducto_PF" />
+</RelativeLayout>
