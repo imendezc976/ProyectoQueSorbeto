@@ -3,6 +3,7 @@ package santiagoyandres.proyectoquesorbeto;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,15 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,9 +43,9 @@ public class Prueba extends AppCompatActivity {
     ArrayList<String> arreglo;
     Button pruebabtn;
     SQLite_Class baseDeDatos;
-    CalendarView calendarView;
     TextView textView123;
     DatePickerDialog.OnDateSetListener mDateSetListener;
+    Double cambio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +57,10 @@ public class Prueba extends AppCompatActivity {
         arreglo = new ArrayList<>();
         lista = (ListView) findViewById(R.id.Lista_PRU);
         pruebabtn = (Button) findViewById(R.id.Button_PRU);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
         textView123 = (TextView) findViewById(R.id.textView123);
+
+        cambioDelDolar tipoDeCambio = new cambioDelDolar();
+        tipoDeCambio.execute();
 
 
 
@@ -102,7 +114,7 @@ public class Prueba extends AppCompatActivity {
                 baseDeDatos.BorraCliente(3);
                 baseDeDatos.BorraCliente(4);*/
 
-
+                textView123.setText(String.valueOf(cambio));
             }
         });
 
@@ -130,5 +142,77 @@ public class Prueba extends AppCompatActivity {
         }
 
         lista.setAdapter(adaptador);
+    }
+
+    private class cambioDelDolar extends AsyncTask<Void, Void, Void> {
+        //String UrlTxt = "https://jsonip.com/";
+        String UrlTxt = "http://www.apilayer.net/api/live?access_key=515aeb957c11b529d5e998e249d2e0ef&format=1";
+        String elTextoBuffer;
+        String elTextoFinal = "";
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            URL elUrl;
+            try {
+                //Nos conectamos y leemos del Servicio Web
+                elUrl = new URL(UrlTxt);
+                BufferedReader elBufferReader = new BufferedReader(new InputStreamReader(elUrl.openStream()));
+
+                //Leemos linea por linea el contenido de lo leido
+                while ((elTextoBuffer = elBufferReader.readLine()) != null) {
+                    elTextoFinal += elTextoBuffer;
+                }
+
+                elBufferReader.close();//Cerramos el buffer
+
+            } catch (MalformedURLException e) {
+                Toast.makeText(getApplicationContext(), "Error al abrir el URL", Toast.LENGTH_LONG).show();
+                //UtilesUI.MensajeToast(getApplicationContext(), "Error al abrir el URL!");
+                e.printStackTrace();
+                Log.d("==>>Error: ", e.toString());
+            } catch (IOException e) {
+                Toast.makeText(getApplicationContext(), "Error al cargar los datos!", Toast.LENGTH_LONG).show();
+                //UtilesUI.MensajeToast(getApplicationContext(), "Error al cargar los datos!");
+                e.printStackTrace();
+                Log.d("==>>Error: ", e.toString());
+            }
+            return null;
+        }//Fin doInBackground
+
+        @Override
+        protected void onPostExecute(Void result) {
+            try {
+                //Guardamos los datos en un objeto JSON
+                JSONObject clienteJSON = new JSONObject(new String(elTextoFinal));
+                JSONObject divisas = clienteJSON.getJSONObject("quotes");
+                cambio = divisas.getDouble("USDCRC");
+
+
+                //Mostramos un valor del JSON
+                //UtilesUI.MensajeToast(getApplicationContext(),"La ip es: "+ clienteJSON.getString("ip"));
+                //Toast.makeText(getApplicationContext(), "La ip es: "+ clienteJSON.getString("name"), Toast.LENGTH_LONG).show();
+
+                //-----------------------------------------------------------------
+                //En el caso de que sean muchos datos
+
+                /*JSONArray elJSONArray = new JSONArray(new String(elTextoFinal));
+
+                for(int i=0; i<elJSONArray.length() ;i++) {
+                    JSONObject elJSON = elJSONArray.getJSONObject(i);
+                    paises.add(elJSON.getString("name"));
+                    //UtilesUI.MensajeToast(getApplicationContext(), "La ip es: " + elJSON.getString("ip"));
+                }//End For*/
+
+                //Toast.makeText(getApplicationContext(), "La ip es: "+ elJSON.getString("name"), Toast.LENGTH_LONG).show();
+                //-----------------------------------------------------------------
+
+            } catch (JSONException e) {
+                //UtilesUI.MensajeToast(getApplicationContext(), "Error al mostrar los datos!");
+                e.printStackTrace();
+                Log.d("==>>Error: ", e.toString());
+            }
+            super.onPostExecute(result);
+
+        }//Fin onPostExecute
     }
 }

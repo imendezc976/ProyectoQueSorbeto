@@ -5,12 +5,12 @@ import java.util.Date;
 public class objFactura {
 
     int Numero;
-    int idCliente;
-    int idProducto;
+    String idCliente;
+    String idProducto;
     int cantidad;
-    Date fecha;
+    String fecha;
 
-    public objFactura(int numero, int idCliente, int idProducto, int cantidad, Date fecha) {
+    public objFactura(int numero, String idCliente, String idProducto, int cantidad, String fecha) {
         Numero = numero;
         this.idCliente = idCliente;
         this.idProducto = idProducto;
@@ -26,19 +26,19 @@ public class objFactura {
         Numero = numero;
     }
 
-    public int getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 
-    public int getIdProducto() {
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -50,11 +50,11 @@ public class objFactura {
         this.cantidad = cantidad;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 }

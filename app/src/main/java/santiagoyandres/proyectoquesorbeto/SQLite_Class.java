@@ -42,7 +42,7 @@ public class SQLite_Class extends SQLiteOpenHelper {
 
     private static final String CREA_TABLA_FACTURA =
             "CREATE TABLE IF NOT EXISTS Factura (" + Factura_Numero  + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                    Factura_cliente + " TEXT, " + Factura_producto + " TEXT, " + Factura_cantidad + " TEXT, "
+                    Factura_cliente + " TEXT, " + Factura_producto + " TEXT, " + Factura_cantidad + " INTEGER, "
                     + Factura_fecha + " TEXT )";
 
     public SQLite_Class(Context context, String name,
@@ -258,5 +258,36 @@ public class SQLite_Class extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + laTabla);
         onCreate(db);// Crea la tabla otra vez
     }//Fin EliminaTablas =======================
+
+    // Funciones para las facturas
+    public int InsertaFactura(objFactura factura) {
+        ContentValues values = new ContentValues();
+        values.put(Factura_Numero, factura.Numero);
+        values.put(Factura_cliente, factura.idCliente);
+        values.put(Factura_producto, factura.idProducto);
+        values.put(Factura_cantidad, factura.cantidad);
+        values.put(Factura_cantidad, factura.fecha);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        //long cliente_Id =
+        db.insert("Factura", null, values);
+        db.close();// Cierra la conexión con la BD
+
+        return (int) factura.Numero;
+    }// Fin InsertaFactura =======================
+
+    public int ModificaFactura(objFactura factura){
+        ContentValues values = new ContentValues();
+        values.put(Factura_Numero, factura.Numero);
+        values.put(Factura_cliente, factura.idCliente);
+        values.put(Factura_producto, factura.idProducto);
+        values.put(Factura_cantidad, factura.cantidad);
+        values.put(Factura_cantidad, factura.fecha);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.update("Factura", values, Cliente_ID + "=" + factura.Numero, null);
+        db.close();
+        return 0;
+    } // Fun ModificaFactura
 
 }// Fin LibSQLIte
