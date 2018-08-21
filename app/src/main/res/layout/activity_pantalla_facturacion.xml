@@ -10,9 +10,10 @@
         android:id="@+id/tViewProducto_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tViewCantidad_PF"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="193dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="144dp"
         android:text="Producto:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -21,8 +22,9 @@
         android:id="@+id/tViewCantidad_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tViewFecha_PF"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tViewProducto_PF"
+        android:layout_marginTop="201dp"
         android:text="Cantidad:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -31,72 +33,51 @@
         android:id="@+id/tViewFecha_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/tViewNumero_PF"
-        android:layout_marginBottom="189dp"
+        android:layout_alignEnd="@+id/tViewProducto_PF"
+        android:layout_alignTop="@+id/tViewFechaMod_PF"
         android:text="Fecha:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/eTextFecha_PF"
-        android:layout_width="190dp"
+    <TextView
+        android:id="@+id/tViewMontoTotal_PF"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tViewFecha_PF"
-        android:layout_alignStart="@+id/eTextNumero_PF"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_alignEnd="@+id/tViewProducto_PF"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="171dp"
+        android:text="Monto total:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewVMontoTotal_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eTextCantidad_PF"
+        android:layout_alignTop="@+id/tViewMontoTotal_PF"
+        android:text="[MontoTotal]"
+        android:textColor="#059100"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/eTextCantidad_PF"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/eTextNumero_PF"
-        android:layout_centerVertical="true"
+        android:layout_alignBottom="@+id/tViewCantidad_PF"
+        android:layout_toEndOf="@+id/tViewTitulo_PF"
         android:ems="10"
         android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/eTextNumero_PF"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tViewNumero_PF"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="41dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/tViewNumero_PF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="83dp"
-        android:text="Numero:"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tViewCliente_PF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tViewFecha_PF"
-        android:layout_alignTop="@+id/spinCliente_PF"
-        android:text="Cliente:"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tViewNumero_PF3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="83dp"
-        android:text="Numero:"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="93dp"
+        android:text="Cliente:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
@@ -117,15 +98,50 @@
         android:id="@+id/spinCliente_PF"
         android:layout_width="193dp"
         android:layout_height="36dp"
-        android:layout_alignEnd="@+id/eTextNumero_PF"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="-11dp"
-        android:layout_marginTop="141dp" />
+        android:layout_alignBottom="@+id/tViewCliente_PF"
+        android:layout_alignEnd="@+id/eTextCantidad_PF" />
 
     <Spinner
         android:id="@+id/spinProducto_PF"
         android:layout_width="189dp"
-        android:layout_height="35dp"
-        android:layout_alignStart="@+id/eTextNumero_PF"
-        android:layout_alignTop="@+id/tViewProducto_PF" />
+        android:layout_height="41dp"
+        android:layout_alignBottom="@+id/tViewProducto_PF"
+        android:layout_alignStart="@+id/eTextCantidad_PF"
+        android:layout_marginBottom="-6dp" />
+
+    <TextView
+        android:id="@+id/tViewFechaMod_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/eTextCantidad_PF"
+        android:layout_marginBottom="227dp"
+        android:text="dd/mm/aaaa"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tViewTipoDeCambio_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tViewFechaMod_PF"
+        android:layout_alignParentTop="true"
+        android:text="Tipo de cambio:" />
+
+    <TextView
+        android:id="@+id/tViewVTipoDeCambio_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="[TipoDeCambio]" />
+
+    <Button
+        android:id="@+id/btnCalcular_PF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tViewProducto_PF"
+        android:layout_marginBottom="39dp"
+        android:text="Calcular" />
+
 </RelativeLayout>

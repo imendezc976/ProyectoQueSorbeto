@@ -229,6 +229,32 @@ public class SQLite_Class extends SQLiteOpenHelper {
         return producto;
     }// Fin BuscaPersona_x_ID =======================
 
+    public objProducto BuscaProducto_x_Nombre(String NombreDelProducto){
+        int iCount =0;
+        objProducto producto = new objProducto();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery =  "SELECT  " + Producto_ID_Prod + "," +
+                Producto_Nom_Prod + "," + Producto_Precio +
+                " FROM Producto WHERE " + Producto_Nom_Prod + "=?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(NombreDelProducto) } );
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                producto.id = cursor.getInt(cursor.getColumnIndex(Producto_ID_Prod));
+                producto.nombre = cursor.getString(cursor.getColumnIndex(Producto_Nom_Prod));
+                producto.precio = cursor.getDouble(cursor.getColumnIndex(Producto_Precio));
+
+            } while (cursor.moveToNext());
+        } else {
+            producto = null;
+        }
+        cursor.close();
+        db.close();
+        return producto;
+    }// Fin BuscaPersona_x_Nombre =======================
+
     public ArrayList <String[]> ConsultaProductos() {
         String identificacion = "";
         String Nombre = "";
@@ -262,7 +288,6 @@ public class SQLite_Class extends SQLiteOpenHelper {
     // Funciones para las facturas
     public int InsertaFactura(objFactura factura) {
         ContentValues values = new ContentValues();
-        values.put(Factura_Numero, factura.Numero);
         values.put(Factura_cliente, factura.idCliente);
         values.put(Factura_producto, factura.idProducto);
         values.put(Factura_cantidad, factura.cantidad);

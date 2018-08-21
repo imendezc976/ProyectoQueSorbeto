@@ -10,8 +10,7 @@ public class objFactura {
     int cantidad;
     String fecha;
 
-    public objFactura(int numero, String idCliente, String idProducto, int cantidad, String fecha) {
-        Numero = numero;
+    public objFactura(String idCliente, String idProducto, int cantidad, String fecha) {
         this.idCliente = idCliente;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
