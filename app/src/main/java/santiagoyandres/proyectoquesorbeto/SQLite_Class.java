@@ -286,19 +286,19 @@ public class SQLite_Class extends SQLiteOpenHelper {
     }//Fin EliminaTablas =======================
 
     // Funciones para las facturas
-    public int InsertaFactura(objFactura factura) {
+    public Long InsertaFactura(objFactura factura) {
         ContentValues values = new ContentValues();
         values.put(Factura_cliente, factura.idCliente);
         values.put(Factura_producto, factura.idProducto);
         values.put(Factura_cantidad, factura.cantidad);
-        values.put(Factura_cantidad, factura.fecha);
+        values.put(Factura_fecha, factura.fecha);
 
         SQLiteDatabase db = this.getWritableDatabase();
         //long cliente_Id =
-        db.insert("Factura", null, values);
+        Long resultado = db.insert("Factura", null, values);
         db.close();// Cierra la conexión con la BD
 
-        return (int) factura.Numero;
+        return resultado;
     }// Fin InsertaFactura =======================
 
     public int ModificaFactura(objFactura factura){
@@ -314,5 +314,37 @@ public class SQLite_Class extends SQLiteOpenHelper {
         db.close();
         return 0;
     } // Fun ModificaFactura
+
+    /*Factura_Numero  + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
+    Factura_cliente + " TEXT, " + Factura_producto + " TEXT, " + Factura_cantidad + " INTEGER, "
+            + Factura_fecha + " TEXT )";*/
+
+    public ArrayList <String[]> ConsultaFactura() {
+        int numero = 0;
+        String cliente = "";
+        String producto = "";
+        ArrayList<String[]> ListaFactura = new ArrayList<String[]>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Factura", null);
+
+        while(cursor.moveToNext())
+        {
+            numero = cursor.getInt(cursor.getColumnIndex(Factura_Numero));
+            cliente = cursor.getString(cursor.getColumnIndex(Factura_cliente));
+            producto = cursor.getString(cursor.getColumnIndex(Factura_producto));
+            String[] resultado = {"",""};
+            resultado[0] = String.valueOf(numero) + ". " + cliente;
+            resultado[1] = producto;
+            ListaFactura.add(resultado);
+
+            numero = 0;
+            cliente = "";
+            producto = "";
+        }//Fin while
+
+        cursor.close();
+        db.close();
+        return ListaFactura;
+    } //Fin ConsultaFactura =======================
 
 }// Fin LibSQLIte

@@ -46,20 +46,5 @@ public class PantallaLogin extends AppCompatActivity {
 
             }
         });
-
-        eTxt_Email_PL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eTxt_Email_PL.setText("");
-            }
-        });
-
-        eTxt_Password_PL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eTxt_Password_PL.setText("");
-                eTxt_Password_PL.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            }
-        });
     }
 }

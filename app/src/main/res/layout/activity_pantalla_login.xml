@@ -13,10 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="203dp"
+        android:layout_marginTop="173dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Email" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/eTxt_Password_PL"
@@ -26,8 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="196dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Password" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btn_Login_PL"
@@ -37,4 +35,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="115dp"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/tViewEmail_PL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/eTxt_Email_PL"
+        android:layout_alignStart="@+id/eTxt_Email_PL"
+        android:layout_marginBottom="-173dp"
+        android:text="Email"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tViewEmail_PL2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eTxt_Email_PL"
+        android:layout_centerVertical="true"
+        android:text="Contraseña"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
 </RelativeLayout>

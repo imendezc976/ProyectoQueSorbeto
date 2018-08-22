@@ -41,13 +41,16 @@ public class PantallaFacturacion extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText eTextCantidad_PF;
-    EditText eTextFecha_PF;
     Spinner spinCliente_PF;
     Spinner spinProducto_PF;
     TextView tViewFechaMod_PF;
+    TextView tViewTipoDeCambio_PF;
     TextView tViewVTipoDeCambio_PF;
+    TextView tViewMontoTotal_PF;
     TextView tViewVMontoTotal_PF;
     Button btnCalcular_PF;
+    Button btnIngresarFactura_PF;
+    Button btnCancelar_PF;
 
     SQLite_Class baseDeDatos;
 
@@ -75,9 +78,13 @@ public class PantallaFacturacion extends AppCompatActivity {
         spinCliente_PF = (Spinner) findViewById(R.id.spinCliente_PF);
         spinProducto_PF = (Spinner) findViewById(R.id.spinProducto_PF);
         tViewFechaMod_PF = (TextView) findViewById(R.id.tViewFechaMod_PF);
+        tViewTipoDeCambio_PF = (TextView) findViewById(R.id.tViewTipoDeCambio_PF);
         tViewVTipoDeCambio_PF = (TextView) findViewById(R.id.tViewVTipoDeCambio_PF);
+        tViewMontoTotal_PF = (TextView) findViewById(R.id.tViewMontoTotal_PF);
         tViewVMontoTotal_PF = (TextView) findViewById(R.id.tViewVMontoTotal_PF);
         btnCalcular_PF = (Button) findViewById(R.id.btnCalcular_PF);
+        btnIngresarFactura_PF = (Button) findViewById(R.id.btnIngresarFactura_PF);
+        btnCancelar_PF = (Button) findViewById(R.id.btnCancelar_PF);
 
         spinCliente_PF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -140,6 +147,36 @@ public class PantallaFacturacion extends AppCompatActivity {
                 String resultado = "₡"+String.valueOf(precioTotal) + " / $" + String.valueOf(df.format(precioTotalDolares));
                 tViewVMontoTotal_PF.setText(resultado);
                 tViewVTipoDeCambio_PF.setText(String.valueOf(cambio));
+                tViewMontoTotal_PF.setVisibility(View.VISIBLE);
+                tViewVMontoTotal_PF.setVisibility(View.VISIBLE);
+                tViewTipoDeCambio_PF.setVisibility(View.VISIBLE);
+                tViewVTipoDeCambio_PF.setVisibility(View.VISIBLE);
+                btnIngresarFactura_PF.setVisibility(View.VISIBLE);
+                btnCancelar_PF.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnIngresarFactura_PF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                objFactura nuevaFactura = new objFactura(spinCliente_PF.getSelectedItem().toString(),
+                                                         spinProducto_PF.getSelectedItem().toString(),
+                                                         Integer.valueOf(eTextCantidad_PF.getText().toString()),
+                                                         tViewFechaMod_PF.getText().toString());
+                Long resultado = baseDeDatos.InsertaFactura(nuevaFactura);
+                Toast.makeText(getApplicationContext(), "La factura nueva se le asigno el numero: " + resultado,Toast.LENGTH_LONG).show();
+                limpiaCampos();
+                btnIngresarFactura_PF.setVisibility(View.INVISIBLE);
+                btnCancelar_PF.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        btnCancelar_PF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiaCampos();
+                btnIngresarFactura_PF.setVisibility(View.INVISIBLE);
+                btnCancelar_PF.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -147,9 +184,13 @@ public class PantallaFacturacion extends AppCompatActivity {
         rellenaProductos();
     }
 
-    private void activaCampos(boolean estado) {
-        eTextCantidad_PF.setEnabled(estado);
-        eTextFecha_PF.setEnabled(estado);
+    private void limpiaCampos() {
+        spinCliente_PF.setSelection(0);
+        spinProducto_PF.setSelection(0);
+        eTextCantidad_PF.setText("");
+        tViewFechaMod_PF.setText("dd/mm/aaaa");
+        tViewMontoTotal_PF.setVisibility(View.INVISIBLE);
+        tViewVMontoTotal_PF.setVisibility(View.INVISIBLE);
     }
 
     private void rellenaClientes(){

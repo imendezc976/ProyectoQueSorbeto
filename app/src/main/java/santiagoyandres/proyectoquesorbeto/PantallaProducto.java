@@ -98,7 +98,7 @@ public class PantallaProducto extends AppCompatActivity {
 
     private void accionBotonInsertaProducto() {
 
-        objProducto ProductoNuevo = new objProducto(Integer.parseInt(eTextId_PP.getText().toString()),
+        objProducto ProductoNuevo = new objProducto(0,
                 eTextNombre_PP.getText().toString(),
                 Double.parseDouble(eTextPrecio_PP.getText().toString()));
         int resultado = baseDeDatos.InsertaProducto(ProductoNuevo);
@@ -125,7 +125,8 @@ public class PantallaProducto extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "El Producto no fue encontrado. ¿Desea ingresarlo?", Toast.LENGTH_LONG).show();
             activaCampos(true);
-            eTextId_PP.setEnabled(true);
+            eTextId_PP.setText("");
+            eTextId_PP.setEnabled(false);
             btnInsertar_PP.setVisibility(View.VISIBLE);
             btnCancelar_PP.setVisibility(View.VISIBLE);
             lViewProductos_PP.setVisibility(View.INVISIBLE);

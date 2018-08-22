@@ -24,7 +24,8 @@
         <activity android:name=".PantallaUsuarios" />
         <activity android:name=".Prueba" />
         <activity android:name=".PantallaProducto" />
-        <activity android:name=".PantallaFacturacion"></activity>
+        <activity android:name=".PantallaFacturacion" />
+        <activity android:name=".PantallaListaFacturas"></activity>
     </application>
 
 </manifest>

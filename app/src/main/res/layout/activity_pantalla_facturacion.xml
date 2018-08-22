@@ -48,7 +48,8 @@
         android:layout_marginBottom="171dp"
         android:text="Monto total:"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tViewVMontoTotal_PF"
@@ -58,7 +59,8 @@
         android:layout_alignTop="@+id/tViewMontoTotal_PF"
         android:text="[MontoTotal]"
         android:textColor="#059100"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/eTextCantidad_PF"
@@ -125,7 +127,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tViewFechaMod_PF"
         android:layout_alignParentTop="true"
-        android:text="Tipo de cambio:" />
+        android:text="Tipo de cambio:"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tViewVTipoDeCambio_PF"
@@ -133,7 +136,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="[TipoDeCambio]" />
+        android:text="[TipoDeCambio]"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btnCalcular_PF"
@@ -143,5 +147,25 @@
         android:layout_alignStart="@+id/tViewProducto_PF"
         android:layout_marginBottom="39dp"
         android:text="Calcular" />
+
+    <Button
+        android:id="@+id/btnIngresarFactura_PF"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/eTextCantidad_PF"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="103dp"
+        android:text="Ingresar factura"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnCancelar_PF"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btnCalcular_PF"
+        android:layout_marginEnd="21dp"
+        android:text="Cancelar"
+        android:visibility="invisible" />
 
 </RelativeLayout>
